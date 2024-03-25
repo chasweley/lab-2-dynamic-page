@@ -10,10 +10,10 @@ export default function Header() {
                         <li>
                             <NavLink to="/">Home</NavLink>
                         </li>
-{/*                         <li>
+                         <li>
                             <NavLink to="/about">About</NavLink>
                         </li>
-                        <li>
+                        {/* <li>
                             <NavLink to="/resume">Resume</NavLink>
                         </li>
                         <li>
