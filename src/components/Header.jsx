@@ -18,10 +18,10 @@ export default function Header() {
                         </li>
                         <li>
                             <NavLink to="/portfolio">Portfolio</NavLink>
-                        </li>
+                        </li> */}
                         <li>
                             <NavLink to="/contact">Contact</NavLink>
-                        </li> */}
+                        </li>
                     </ul>
                 </nav>
                 <div id="ham-menu">
