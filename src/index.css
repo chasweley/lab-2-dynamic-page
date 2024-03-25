@@ -1,68 +1,363 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --main-color: rgb(17, 17, 17);
+  --secondary-color: rgb(255, 53, 97);
+  --secondary-color-darker: rgb(209, 8, 52);
+  --background-color: rgb(255, 255, 255);
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+* {
+  font-size: 24px;
+  font-family: 'Inter', sans-serif;
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-size: 2rem;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+h2 {
+  font-size: 1.2rem;
+}
+
+h1,
+h2,
+p,
+footer,
+ol,
+ul {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.cursive {
+  font-style: italic;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.main-heading {
+  font-family: "Questrial", sans-serif;
+  font-size: 2.3rem;
   font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  padding-top: 1rem;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+/*Container for all content on page*/
+.container {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 3em 1fr 2em;
+}
+
+/*Grid for placement of navigation*/
+.container header.grid-header {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  height: min-content;
+  background-color: var(--background-color);
+}
+
+/*Grid for main content area*/
+.container main.grid-main {
+  grid-row-start: 2;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  background-color: var(--background-color);
+}
+
+/*Grid for footer*/
+.container footer.grid-footer {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 3;
+  height: 2rem;
+}
+
+/*To change grid look for smaller screen*/
+@media screen and (max-width: 600px) {
+  .container {
+     height: 100vh;
+     display: grid;
+     grid-template-columns: 1fr;
+     grid-template-rows: 5rem max-content 2rem;
   }
-  a:hover {
-    color: #747bff;
+  .container header.grid-header {
+     grid-column-start: 1;
+     grid-row-start: 1;
+     height: 3em;
+     background-color: rgb(255, 255, 255);
   }
-  button {
-    background-color: #f9f9f9;
+  .container main.grid-main {
+     grid-row-start: 2;
+     grid-column-start: 1;
+     grid-column-end: 1;
+     min-height: calc(100vh - 3em - 2em);
+     background-color: var(--background-color);
   }
+  .container footer.grid-footer {
+     grid-row-start: 4;
+     grid-row-end: 4;
+     grid-column-start: 1;
+     grid-column-end: 3;
+     height: 2rem;
+  }
+}
+
+/*Id for structure of the navivation menu*/
+#navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-left: 0;
+  list-style-type: none;
+  border-radius: 0 0 0 0;
+}
+
+/*Id for checkbox main navigation menu*/
+#nav-toggle {
+  display: none;
+}
+
+/*Id for hamburger navigation menu*/
+#ham-menu {
+  display: none;
+}
+
+/*To show hamburger menu instead when regular menu becomes almost squished,
+and slightly alter general look of app*/
+@media screen and (max-width: 600px) {
+  body {
+    padding-top: 2rem;
+  }
+  .main-heading {
+    text-align: center;
+  }
+  /*Placement for hamburger menu*/
+  #ham-menu {
+     display: block;
+     position: fixed;
+     right: 1rem;
+     top: 1rem;
+     z-index: 1;
+  }
+  .fa-solid, fa-bars {
+    color: var(--secondary-color);
+  }
+  /*Look for drop down menu*/
+  #navigation {
+     flex-direction: column;
+     position: fixed;
+     z-index: 1;
+     left: 0;
+     right: 0;
+     top: 0;
+     bottom: 100%;
+     text-align: center;
+     background-color: var(--background-color);
+     overflow: hidden;
+     margin-top: 0;
+     transition: all 0.5s;
+  }
+  /*Look for drop down menu when hamburger menu is checked*/
+  #nav-toggle:checked ~ #navigation{
+     background-color: var(--background-color);
+     bottom: 50%;
+     padding-top: 0.5rem;
+     padding: 0.5rem;
+  }
+}
+
+/*Look for a normal, unvisited link*/
+a:link {
+  color: var(--main-color);
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+/*Look for a link the user has visited*/
+a:visited {
+  color: var(--main-color);
+}
+
+/*Look for a link when the user mouses over it*/
+a:hover {
+  color: var(--secondary-color);
+  text-underline-offset: 0.2rem;
+  text-decoration: underline var(--secondary-color);
+}
+
+/* Look for a link the moment it is clicked */
+a:active {
+  color: var(--secondary-color-darker);
+  text-underline-offset: 0.2rem;
+  text-decoration: underline var(--secondary-color-darker);
+}
+
+/*Look for a link in menu when you are on that page*/
+#current-page {
+  color: var(--secondary-color);
+}
+
+/*Main content area for start page to center the image*/
+#main-flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+/*Styling for the image on the home page*/
+#main-flex-img {
+  margin-top: 1rem;
+  height: 20rem;
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+     56deg,
+     rgba(255, 255, 255, 0) 0%,
+     rgba(255, 0, 55, 1) 100%
+  );
+  border-radius: 999999rem;
+}
+
+/*Make image on home page smaller with smaller screen*/
+@media screen and (max-width: 900px) {
+  #main-flex-img {
+     height: 10rem;
+  }
+}
+
+/*Class for the general look when displaying a page and it's content*/
+.page-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+}
+
+/*Class for the secret easter egg button*/
+.header-button {
+  color: var(--secondary-color);
+  background-color: var(--secondary-color);
+  border: none;
+}
+
+/*Class for text that appears in the pink side column*/
+.aside-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 5rem;
+  list-style-type: none;
+}
+
+/*For lists on different pages*/
+.ol-resume,
+.ul-portfolio {
+  list-style-type: none;
+}
+
+.li-resume {
+  margin-bottom: 1.1rem;
+}
+
+/*To change display of resume depending on screen width,
+if screen is larger than 900px, info is presented in two columns*/
+@media screen and (min-width: 900px) {
+  .resume-card {
+     display: flex;
+     flex-direction: column;
+     width: 50%;
+  }
+
+  .div-resume {
+     display: flex;
+     flex-wrap: wrap;
+     justify-content: space-between;
+  }
+}
+
+/*Classes to make the "cards" in the portfolio present next to each other nicely*/
+.ul-portfolio {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.img-portfolio {
+  max-width: 90%;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+  width: 48%;
+  border-radius: 15px;
+  align-items: center;
+  box-shadow: 5px 5px 8px 8px lightgray;
+}
+
+/*Placement for loading icon*/
+.loading-icon {
+  margin-top: 50vh;
+  margin-left: 48vw;
+}
+
+/*When screen becomes smaller display cards in a column instead*/
+@media screen and (max-width: 550px) {
+  .ul-portfolio {
+     flex-direction: column;
+  }
+
+  .project-card {
+     width: 100%;
+  }
+}
+
+/*For larger screens three cards are displayed in a row*/
+@media screen and (min-width: 900px) {
+  .project-card {
+    width: 30%;
+  }
+}
+
+/*Class to get space around the button in the card*/
+.div-show-more {
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/*Class for the look of the modal popup*/
+.more-info-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  text-align: center;
+  background-color: var(--background-color);
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-radius: 15px;
+  border: 1px solid lightgray;
+}
+
+/*Class for the look of the actual show more button*/
+.show-more-button {
+  background-color: var(--secondary-color);
+  color: white;
+  border-radius: 40px;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+  padding-left: 1.1rem;
+  padding-right: 1.1rem;
+  border: 1px solid var(--secondary-color);
 }
